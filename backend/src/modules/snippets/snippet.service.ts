@@ -49,27 +49,28 @@ export class SnippetService {
     const normalizedTag = tag?.trim();
 
     if (normalizedQuery) {
-      const safeQuery = this.escapeRegExp(normalizedQuery);
-      const queryRegex = new RegExp(safeQuery, 'i');
-
-      filter.$or = [{ title: queryRegex }, { content: queryRegex }];
+      filter.$text = { $search: normalizedQuery };
     }
 
     if (normalizedTag) {
       filter.tags = normalizedTag;
     }
 
-    const data = await this.snippetModel.find(filter).skip(skip).limit(limit);
+    const findQuery = this.snippetModel.find(filter).skip(skip).limit(limit);
+
+    if (normalizedQuery) {
+      findQuery
+        .select({ score: { $meta: 'textScore' } })
+        .sort({ score: { $meta: 'textScore' } });
+    }
+
+    const data = await findQuery;
 
     return buildSuccessResponse(
       HttpStatus.OK,
       'Snippets successfully fetched',
       data,
     );
-  }
-
-  private escapeRegExp(value: string): string {
-    return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   async updateById(id: string, snippet: UpdateSnippetDto) {
@@ -106,7 +107,7 @@ export class SnippetService {
       id,
       updatePayload,
       {
-        new: true,
+        returnDocument: 'after',
         runValidators: true,
       },
     );
@@ -119,6 +120,24 @@ export class SnippetService {
       HttpStatus.OK,
       'Snippet successfully updated',
       updatedSnippet,
+    );
+  }
+
+  async deleteById(id: string) {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new ApiErrorException('Snippet not found', HttpStatus.NOT_FOUND);
+    }
+
+    const deletedSnippet = await this.snippetModel.findByIdAndDelete(id);
+
+    if (!deletedSnippet) {
+      throw new ApiErrorException('Snippet not found', HttpStatus.NOT_FOUND);
+    }
+
+    return buildSuccessResponse(
+      HttpStatus.NO_CONTENT,
+      'Snippet successfully deleted',
+      deletedSnippet,
     );
   }
 }
