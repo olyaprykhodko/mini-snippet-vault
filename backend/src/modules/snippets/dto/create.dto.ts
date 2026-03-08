@@ -18,7 +18,7 @@ export class CreateSnippetDto {
   content: string;
 
   @IsArray()
-  tags: string[] | [];
+  tags?: string[] | [];
 
   @IsEnum(['link', 'note', 'command'])
   type: 'link' | 'note' | 'command';

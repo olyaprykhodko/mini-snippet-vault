@@ -19,6 +19,7 @@ export default function SearchForm({
       <div className="flex gap-3">
         <input
           type="text"
+          name="query"
           value={searchData.query}
           onChange={(e) => onChange(e)}
           placeholder="Search snippets..."
@@ -26,6 +27,7 @@ export default function SearchForm({
         />
         <input
           type="text"
+          name="tag"
           value={searchData.tag}
           onChange={(e) => onChange(e)}
           placeholder="Filter by tag"

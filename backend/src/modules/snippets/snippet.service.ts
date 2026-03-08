@@ -28,7 +28,7 @@ export class SnippetService {
     const newSnippet = await this.snippetModel.create({
       title: snippet.title,
       content: snippet.content,
-      tags: snippet.tags,
+      tags: snippet.tags || [],
       type: snippet.type,
     });
 

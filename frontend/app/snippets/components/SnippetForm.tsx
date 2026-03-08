@@ -36,6 +36,7 @@ export default function SnippetForm({
           </label>
           <input
             type="text"
+            name="title"
             value={formData.title}
             onChange={(e) => onChange(e)}
             maxLength={30}
@@ -51,6 +52,7 @@ export default function SnippetForm({
             Content <span className="text-red-500">*</span>
           </label>
           <textarea
+            name="content"
             value={formData.content}
             onChange={(e) => onChange(e)}
             maxLength={300}
@@ -69,6 +71,7 @@ export default function SnippetForm({
             </label>
             <input
               type="text"
+              name="tags"
               value={formData.tags}
               onChange={(e) => onChange(e)}
               className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -80,6 +83,7 @@ export default function SnippetForm({
               Type <span className="text-red-500">*</span>
             </label>
             <select
+              name="type"
               value={formData.type}
               onChange={(e) => onChange(e)}
               className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"

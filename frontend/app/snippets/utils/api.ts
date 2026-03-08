@@ -1,4 +1,4 @@
-import { ApiResponse, Snippet } from '../types';
+import { ApiResponse, Snippet, FormData } from '../types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -23,6 +23,24 @@ export async function fetchSnippets(params: {
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : 'Failed to fetch snippets',
+    );
+  }
+}
+
+export async function createSnippet(
+  formData: FormData,
+): Promise<ApiResponse<Snippet>> {
+  try {
+    const response = await fetch(`${BASE_URL}/snippets`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : 'Failed to create a snippet',
     );
   }
 }
