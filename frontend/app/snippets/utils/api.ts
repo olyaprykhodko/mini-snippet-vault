@@ -44,3 +44,25 @@ export async function createSnippet(
     );
   }
 }
+
+export async function updateSnippet(
+  id: string,
+  formData: FormData,
+): Promise<ApiResponse<Snippet>> {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/snippets/${encodeURIComponent(id)}`,
+      {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      },
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : 'Failed to create a snippet',
+    );
+  }
+}

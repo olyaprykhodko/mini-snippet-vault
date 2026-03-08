@@ -3,6 +3,7 @@ import { FormData, FormErrors } from '../types';
 import Button from './Button';
 
 interface SnippetFormProps {
+  title: string;
   formData: FormData;
   onChange: (
     e: React.ChangeEvent<
@@ -16,6 +17,7 @@ interface SnippetFormProps {
 }
 
 export default function SnippetForm({
+  title,
   formData,
   onChange,
   onSubmit,
@@ -25,7 +27,7 @@ export default function SnippetForm({
 }: SnippetFormProps) {
   return (
     <div className="mb-6 rounded-lg bg-white p-6 shadow">
-      <h2 className="mb-4 text-lg font-semibold">Create New Snippet</h2>
+      <h2 className="mb-4 text-lg font-semibold">{title}</h2>
 
       <form onSubmit={onSubmit} className="space-y-4">
         {errors && <Error error="Fill all required fields" />}
