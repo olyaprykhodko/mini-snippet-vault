@@ -1,9 +1,10 @@
 import {
   IsArray,
-  IsEnum,
+  IsIn,
   IsString,
   MaxLength,
   MinLength,
+  ArrayMaxSize,
 } from 'class-validator';
 
 export class CreateSnippetDto {
@@ -18,8 +19,10 @@ export class CreateSnippetDto {
   content: string;
 
   @IsArray()
+  @ArrayMaxSize(12)
+  @IsString({ each: true })
   tags?: string[] | [];
 
-  @IsEnum(['link', 'note', 'command'])
+  @IsIn(['link', 'note', 'command'])
   type: 'link' | 'note' | 'command';
 }

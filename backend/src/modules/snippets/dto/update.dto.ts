@@ -1,10 +1,11 @@
 import {
   IsArray,
-  IsEnum,
+  IsIn,
   IsOptional,
   IsString,
   MaxLength,
   MinLength,
+  ArrayMaxSize,
 } from 'class-validator';
 
 export class UpdateSnippetDto {
@@ -22,9 +23,11 @@ export class UpdateSnippetDto {
 
   @IsOptional()
   @IsArray()
+  @ArrayMaxSize(12)
+  @IsString({ each: true })
   tags?: string[];
 
   @IsOptional()
-  @IsEnum(['link', 'note', 'command'])
+  @IsIn(['link', 'note', 'command'])
   type?: 'link' | 'note' | 'command';
 }
