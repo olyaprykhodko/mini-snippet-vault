@@ -3,4 +3,6 @@ export interface SnippetDocument {
   content: string;
   tags: string[];
   type: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

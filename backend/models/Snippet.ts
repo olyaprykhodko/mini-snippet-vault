@@ -7,9 +7,11 @@ export const snippetSchema = new Schema(
     title: String,
     content: String,
     tags: [String],
-    type: String, // link/note/command,
+    type: String, // link/note/command
   },
   {
     timestamps: true,
   },
 );
+
+snippetSchema.index({ title: 'text', content: 'text' });
