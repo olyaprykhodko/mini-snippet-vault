@@ -4,7 +4,7 @@ interface ButtonProps {
   disabled?: boolean;
   className?: string;
   type: 'button' | 'submit' | 'reset';
-  variant?: 'submit' | 'delete' | 'cancel';
+  variant?: 'button' | 'submit' | 'delete' | 'cancel';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
 }
@@ -29,6 +29,8 @@ export default function Button({
   };
 
   const colorStyles = {
+    button:
+      'rounded bg-gray-100 px-2 py-1 text-xs text-gray-600 hover:bg-gray-200',
     submit:
       'rounded-lg bg-indigo-600 px-6 py-2 text-white transition-colors hover:bg-indigo-700 disabled:opacity-50',
     delete:
