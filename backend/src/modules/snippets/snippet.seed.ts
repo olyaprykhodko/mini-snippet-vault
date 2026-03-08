@@ -9,38 +9,38 @@ const SEED_SNIPPETS: Array<
   {
     title: 'Deploy check',
     content: 'npm run build',
-    tags: ['nextjs', 'deploy', 'build'],
+    tags: ['deploy', 'build'],
     type: 'command',
   },
   {
     title: 'Mongo dump',
     content: 'mongodump --uri "$MONGO_CONNECTION_URI" --out ./backup',
-    tags: ['mongo', 'backup', 'database'],
+    tags: ['mongo', 'database'],
     type: 'command',
   },
   {
     title: 'Interfaces',
     content: 'Remember to write props interfaces for components',
-    tags: ['typescript', 'next', 'frontend'],
+    tags: ['typescript'],
     type: 'note',
   },
   {
     title: 'Tailwind docs',
     content: 'https://tailwindcss.com/docs/installation/using-vite',
-    tags: ['tailwind', 'css', 'reference'],
+    tags: ['tailwind', 'css'],
     type: 'link',
   },
   {
     title: 'Dependency injection',
     content:
       'DI allows the creation of dependent objects outside of a class and provides those objects to another class that depends on it through injection at runtime rather than the dependent class creating it',
-    tags: ['nestjs', 'backend'],
+    tags: ['nestjs'],
     type: 'note',
   },
   {
     title: 'Kill port 3000',
     content: 'lsof -ti :3000 | xargs kill -9',
-    tags: ['macos', 'ports', 'command'],
+    tags: ['command'],
     type: 'command',
   },
   {
@@ -53,7 +53,7 @@ const SEED_SNIPPETS: Array<
   {
     title: 'NestJS docs',
     content: 'https://docs.nestjs.com/',
-    tags: ['nestjs', 'reference', 'backend'],
+    tags: ['nestjs', 'backend'],
     type: 'link',
   },
   {
@@ -66,7 +66,7 @@ const SEED_SNIPPETS: Array<
   {
     title: 'Editor UX rule',
     content: 'Do not forget about loading, empty and error states.',
-    tags: ['ux', 'frontend', 'states'],
+    tags: ['ux', 'states'],
     type: 'note',
   },
   {
@@ -85,19 +85,19 @@ const SEED_SNIPPETS: Array<
     title: 'Commit naming',
     content:
       'feat - new functionality; fix - fix bugs; docs - changes in documentation; refactor - change structure without new functionality; style - formatting; chore - update dependencies; ci - project build configuration',
-    tags: ['git', 'workflow', 'review'],
+    tags: ['git', 'workflow'],
     type: 'note',
   },
   {
     title: 'Remix Icon set',
     content: 'https://remixicon.com/',
-    tags: ['icons', 'ui', 'reference'],
+    tags: ['icons', 'ui'],
     type: 'link',
   },
   {
     title: 'Check TypeScript errors',
     content: 'npm run build && npm run lint',
-    tags: ['typescript', 'quality', 'command'],
+    tags: ['typescript'],
     type: 'command',
   },
 ];
