@@ -62,7 +62,24 @@ export async function updateSnippet(
     return data;
   } catch (error) {
     throw new Error(
-      error instanceof Error ? error.message : 'Failed to create a snippet',
+      error instanceof Error ? error.message : 'Failed to update a snippet',
+    );
+  }
+}
+
+export async function deleteSnippet(id: string): Promise<ApiResponse<Snippet>> {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/snippets/${encodeURIComponent(id)}`,
+      {
+        method: 'DELETE',
+      },
+    );
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    throw new Error(
+      error instanceof Error ? error.message : 'Failed to delete a snippet',
     );
   }
 }
