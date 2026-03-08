@@ -1,7 +1,7 @@
 import { Controller, Query, Get, Post, Body } from '@nestjs/common';
 import { SnippetService } from './snippet.service.js';
-import { PaginationDto } from '../dto/pagination.dto.js';
-import { CreateSnippetDto } from '../dto/create.dto.js';
+import { PaginationDto } from './dto/pagination.dto.js';
+import { CreateSnippetDto } from './dto/create.dto.js';
 
 @Controller('snippets')
 export class SnippetController {
