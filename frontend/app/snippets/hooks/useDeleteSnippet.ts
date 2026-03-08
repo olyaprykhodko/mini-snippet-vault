@@ -13,12 +13,12 @@ export function useDeleteSnippet() {
     try {
       const response = await deleteSnippet(id);
       setData(response.data);
-      return response.data;
+      return true;
     } catch (err) {
       const message =
         err instanceof Error ? err.message : 'Failed to delete snippet';
       setError(message);
-      return null;
+      return false;
     } finally {
       setLoading(false);
     }

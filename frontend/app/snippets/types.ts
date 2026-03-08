@@ -33,5 +33,10 @@ export interface SearchData {
   tag: string;
 }
 
+export interface ApiErrorResponse {
+  message?: string;
+  statusCode?: number | string;
+}
+
 export type SnippetType = 'link' | 'note' | 'command';
 export const SNIPPET_TYPES: SnippetType[] = ['note', 'link', 'command'];

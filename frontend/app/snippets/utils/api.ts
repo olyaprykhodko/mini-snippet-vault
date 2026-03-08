@@ -1,6 +1,35 @@
-import { ApiResponse, Snippet, FormData } from '../types';
+import { ApiErrorResponse, ApiResponse, Snippet, FormData } from '../types';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3000';
+
+async function parseResponse<T>(response: Response): Promise<ApiResponse<T>> {
+  if (response.status === 204) {
+    return {
+      statusCode: 204,
+      message: 'Snippet deleted successfully',
+      data: null as T,
+    };
+  }
+
+  const payload = (await response.json().catch(() => null)) as
+    | ApiResponse<T>
+    | ApiErrorResponse
+    | null;
+
+  if (!response.ok) {
+    const message =
+      payload && 'message' in payload && typeof payload.message === 'string'
+        ? payload.message
+        : 'Request failed';
+    throw new Error(message);
+  }
+
+  if (!payload || !('data' in payload)) {
+    throw new Error('Invalid server response');
+  }
+
+  return payload;
+}
 
 export async function fetchSnippets(params: {
   page?: string;
@@ -18,8 +47,7 @@ export async function fetchSnippets(params: {
 
   try {
     const response = await fetch(`${BASE_URL}/snippets?${searchParams}`);
-    const data = await response.json();
-    return data;
+    return parseResponse<Snippet[]>(response);
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : 'Failed to fetch snippets',
@@ -36,8 +64,7 @@ export async function createSnippet(
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     });
-    const data = await response.json();
-    return data;
+    return parseResponse<Snippet>(response);
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : 'Failed to create a snippet',
@@ -58,8 +85,7 @@ export async function updateSnippet(
         body: JSON.stringify(formData),
       },
     );
-    const data = await response.json();
-    return data;
+    return parseResponse<Snippet>(response);
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : 'Failed to update a snippet',
@@ -67,7 +93,9 @@ export async function updateSnippet(
   }
 }
 
-export async function deleteSnippet(id: string): Promise<ApiResponse<Snippet>> {
+export async function deleteSnippet(
+  id: string,
+): Promise<ApiResponse<Snippet | null>> {
   try {
     const response = await fetch(
       `${BASE_URL}/snippets/${encodeURIComponent(id)}`,
@@ -75,8 +103,7 @@ export async function deleteSnippet(id: string): Promise<ApiResponse<Snippet>> {
         method: 'DELETE',
       },
     );
-    const result = await response.json();
-    return result;
+    return parseResponse<Snippet | null>(response);
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : 'Failed to delete a snippet',
