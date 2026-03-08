@@ -14,6 +14,14 @@ export interface Snippet {
   updatedAt: string;
 }
 
+export interface PaginatedSnippets {
+  items: Snippet[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
 export interface FormData {
   title: string;
   content: string;
