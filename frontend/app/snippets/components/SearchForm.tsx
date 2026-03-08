@@ -21,16 +21,16 @@ export default function SearchForm({
   return (
     <form
       onSubmit={onSubmit}
-      className="mb-6 border border-slate-200 bg-white p-4"
+      className="mb-6 max-w-full overflow-hidden border border-slate-200 bg-white p-4"
     >
-      <div className="flex flex-col gap-3 md:flex-row">
+      <div className="flex min-w-0 flex-col gap-3 md:flex-row">
         <input
           type="text"
           name="query"
           value={searchData.query}
           onChange={(e) => onChange(e)}
           placeholder="Search snippets..."
-          className="flex-1 border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none transition focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100"
+          className="min-w-0 flex-1 border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none transition focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100"
         />
         <input
           type="text"
@@ -38,7 +38,7 @@ export default function SearchForm({
           value={searchData.tag}
           onChange={(e) => onChange(e)}
           placeholder="Filter by tag"
-          className="w-full border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none transition focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100 md:w-56"
+          className="min-w-0 w-full border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none transition focus:border-emerald-700 focus:ring-2 focus:ring-emerald-100 md:w-56"
         />
 
         <Button type="submit" variant="submit" text="Search" />

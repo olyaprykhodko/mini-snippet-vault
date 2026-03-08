@@ -1,5 +1,6 @@
 import { Snippet, SnippetType } from '../types';
 import Button from './Button';
+import SnippetContent from './SnippetContent';
 
 interface SnippetCardProps {
   snippet: Snippet;
@@ -19,19 +20,23 @@ export default function SnippetCard({
   };
 
   return (
-    <div className="border border-slate-200 bg-white p-6">
-      <div className="mb-4 flex items-start justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">{snippet.title}</h1>
+    <div className="min-w-0 max-w-full overflow-hidden border border-slate-200 bg-white p-6">
+      <div className="mb-4 flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <h1 className="min-w-0 break-words text-2xl font-bold text-slate-900">
+          {snippet.title}
+        </h1>
         <span
-          className={`px-2.5 py-1 text-xs font-semibold ${TYPE_COLORS[snippet.type]}`}
+          className={`w-fit shrink-0 px-2.5 py-1 text-xs font-semibold ${TYPE_COLORS[snippet.type]}`}
         >
           {snippet.type}
         </span>
       </div>
 
-      <p className="mb-6 whitespace-pre-wrap text-slate-700">
-        {snippet.content}
-      </p>
+      <SnippetContent
+        content={snippet.content}
+        type={snippet.type}
+        className="mb-6 whitespace-pre-wrap text-slate-700"
+      />
 
       {snippet.tags.length > 0 && (
         <div className="mb-6 flex flex-wrap gap-2">
@@ -51,7 +56,7 @@ export default function SnippetCard({
         {new Date(snippet.updatedAt).toLocaleString()}
       </div>
 
-      <div className="flex gap-3 border-t border-slate-200 pt-4">
+      <div className="flex flex-col gap-3 border-t border-slate-200 pt-4 sm:flex-row">
         <Button type="button" variant="button" onClick={onEdit} text="Edit" />
         <Button
           type="button"
