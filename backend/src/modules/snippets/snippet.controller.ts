@@ -27,6 +27,11 @@ export class SnippetController {
     return this.snippetsService.findAll(paginationDto);
   }
 
+  @Get(':id')
+  async getSnippetById(@Param('id') id: string) {
+    return this.snippetsService.findById(id);
+  }
+
   @Patch(':id')
   async updateSnippetById(
     @Body() updateDto: UpdateSnippetDto,

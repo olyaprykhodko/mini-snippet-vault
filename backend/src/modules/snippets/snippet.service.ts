@@ -64,18 +64,59 @@ export class SnippetService {
         .sort({ score: { $meta: 'textScore' } });
     }
 
-    const data = await findQuery;
+    const [items, total] = await Promise.all([
+      findQuery,
+      this.snippetModel.countDocuments(filter),
+    ]);
 
     return buildSuccessResponse(
       HttpStatus.OK,
       'Snippets successfully fetched',
-      data,
+      {
+        items,
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit) || 1,
+      },
+    );
+  }
+
+  async findById(id: string) {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new ApiErrorException('Snippet not found', HttpStatus.NOT_FOUND);
+    }
+
+    const snippet = await this.snippetModel.findById(id);
+
+    if (!snippet) {
+      throw new ApiErrorException('Snippet not found', HttpStatus.NOT_FOUND);
+    }
+
+    return buildSuccessResponse(
+      HttpStatus.OK,
+      'Snippet successfully fetched',
+      snippet,
     );
   }
 
   async updateById(id: string, snippet: UpdateSnippetDto) {
     if (!Types.ObjectId.isValid(id)) {
       throw new ApiErrorException('Snippet not found', HttpStatus.NOT_FOUND);
+    }
+
+    if (snippet.title !== undefined) {
+      const existing = await this.snippetModel.findOne({
+        title: snippet.title,
+        _id: { $ne: id },
+      });
+
+      if (existing) {
+        throw new ApiErrorException(
+          'Snippet with this title already exists',
+          HttpStatus.CONFLICT,
+        );
+      }
     }
 
     const updatePayload: Record<string, unknown> = {};
@@ -135,7 +176,7 @@ export class SnippetService {
     }
 
     return buildSuccessResponse(
-      HttpStatus.NO_CONTENT,
+      HttpStatus.OK,
       'Snippet successfully deleted',
       deletedSnippet,
     );
