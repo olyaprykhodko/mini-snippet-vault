@@ -20,23 +20,21 @@ export default function Button({
   className = '',
 }: ButtonProps) {
   const baseStyles =
-    'font-medium transition-all duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-95 inline-flex items-center justify-center';
+    'inline-flex items-center justify-center gap-2 font-medium transition-colors duration-150 focus:outline-none focus:ring focus:ring-emerald-500 disabled:cursor-not-allowed disabled:opacity-50';
 
   const sizeStyles = {
-    sm: 'px-3 py-1.5 text-sm rounded-lg',
-    md: 'px-4 py-2.5 text-sm rounded-xl',
-    lg: 'px-6 py-3 text-base rounded-xl',
+    sm: 'px-3 py-2 text-sm',
+    md: 'px-4 py-2.5 text-sm',
+    lg: 'px-5 py-3 text-base',
   };
 
   const colorStyles = {
     button:
-      'rounded bg-gray-100 px-2 py-1 text-xs text-gray-600 hover:bg-gray-200',
+      'border border-slate-300 bg-white text-slate-700 hover:border-emerald-700 hover:text-emerald-800',
     submit:
-      'rounded-lg bg-indigo-600 px-6 py-2 text-white transition-colors hover:bg-indigo-700 disabled:opacity-50',
-    delete:
-      'hover:bg-background-300 disabled:bg-background-300 text-primary-800 focus:ring-background-300', // fix
-    cancel:
-      'px-4 py-2 border border-background-200 dark:border-background-400 rounded-md text-background-900 hover:bg-background-100 dark:hover:bg-background-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors',
+      'border border-emerald-800 bg-emerald-800 text-white hover:bg-emerald-900',
+    delete: 'border border-red-700 bg-red-700 text-white hover:bg-red-800',
+    cancel: 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50',
   };
 
   const widthStyle = fullWidth ? 'w-full' : '';
@@ -50,7 +48,7 @@ export default function Button({
       className={combinedClassName}
       onClick={onClick}
     >
-      {disabled ? <>Please wait...</> : <>{text}</>}
+      {text}
     </button>
   );
 }
