@@ -198,3 +198,5 @@ Response `data`:
 
 MongoDB and frontend app are deployed on [Vercel](https://vercel.com), and backend is published on [Render](https://render.com).
 Try the [demo app](https://mini-snippet-vault-frontend.vercel.app/snippets)
+
+### Important: All serviced are deployed on free instances, and spin down with inactivity, which can delay requests by 50 seconds or more.
