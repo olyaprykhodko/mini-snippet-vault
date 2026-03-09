@@ -52,8 +52,7 @@ export default function SnippetCard({
       )}
 
       <div className="mb-6 text-xs text-slate-400">
-        Created: {new Date(snippet.createdAt).toLocaleString()} · Updated:{' '}
-        {new Date(snippet.updatedAt).toLocaleString()}
+        Created: {new Date(snippet.createdAt).toLocaleString()}
       </div>
 
       <div className="flex flex-col gap-3 border-t border-slate-200 pt-4 sm:flex-row">
