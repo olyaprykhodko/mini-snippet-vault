@@ -2,6 +2,14 @@
 
 Tagged snippet vault for notes, links, and shell commands. The project includes a NestJS + MongoDB API and a Next.js frontend with create, search, filter, edit, delete, loading, empty, and error states.
 
+## Preview
+
+<img width="910" height="1261" alt="preview-1" src="https://github.com/user-attachments/assets/7c95b563-cb6e-495d-88d8-9fcbe48f1482" />
+<img width="907" height="898" alt="preview-3" src="https://github.com/user-attachments/assets/b785c99c-06f1-4ad8-abd5-c221ec9f2c94" />
+<img width="904" height="456" alt="preview-2" src="https://github.com/user-attachments/assets/0148d1cf-b456-47a7-bd20-25590a67601c" />
+
+
+
 ## Stack
 
 - Backend: NestJS, Mongoose, MongoDB, class-validator
