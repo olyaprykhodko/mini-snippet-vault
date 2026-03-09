@@ -72,7 +72,7 @@ Services are running on ports:
 | Backend  | http://localhost:3000     |
 | MongoDB  | mongodb://localhost:27017 |
 
-On the first backend startup, the app inserts 15 demo snippets if the collection is empty.
+On the first backend startup, the app inserts a list demo snippets if the collection is empty.
 
 ## Local Development
 
